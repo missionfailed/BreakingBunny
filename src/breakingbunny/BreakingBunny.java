@@ -8,7 +8,7 @@ package breakingbunny;
 
 /**
  *
- * @author Tate
+ * @author Graciela Garcia Ovi Villarreal
  */
 public class BreakingBunny {
 
