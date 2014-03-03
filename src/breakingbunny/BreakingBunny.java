@@ -8,8 +8,7 @@ package breakingbunny;
 
 /**
  *
- * @author Tate y Ovi
- * COSAS....
+ * @author Ovidio Villarreal, Graciela Garcia
  */
 public class BreakingBunny {
 
@@ -18,6 +17,8 @@ public class BreakingBunny {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JFrameBB bunny = new JFrameBB();
+        bunny.setVisible(true);
     }
     
 }
