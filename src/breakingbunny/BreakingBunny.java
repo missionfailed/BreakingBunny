@@ -8,7 +8,7 @@ package breakingbunny;
 
 /**
  *
- * @author Tate
+ * @author Tate y Ovi
  */
 public class BreakingBunny {
 
