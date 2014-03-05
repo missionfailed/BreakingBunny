@@ -10,6 +10,8 @@ package breakingbunny;
  *
  * @author Tate && Ovi
  */
+import java.awt.Image;
+import java.awt.Toolkit;
 public class Ponejtio extends Base{
     int velocidad;
     

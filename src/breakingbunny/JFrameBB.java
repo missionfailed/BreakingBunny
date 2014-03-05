@@ -46,8 +46,17 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private boolean off; // Checa si se quiere sonido o no
         private boolean pausa;  // Checa si el juego esta pausado
         private boolean instrucciones;  // Checa si se oprimio el boton para ver las instrucciones
-        private int vidas;
-        private int direccion;
+        private int vidas;      // Vidas del personaje
+        private int direccion; // Direccion del Ponejito
+        private Bloque []bloque;    // Objeto Bloque
+        private Ponejtio ponejito;  // Objeto Ponejtio
+        private Pelotita pelotita;  // Objeto Pelotita
+        private SoundClip colPared;    //Objeto AudioClip 
+        private SoundClip destrBloque;     //Objeto AudioClip
+        private String []arr;   // Objeto de lo leeido del archivo
+        //Variables control de tiempo de animacion
+        private long tiempoActual;
+	private long tiempoInicial;
         
          //Constructor
         public JFrameBB() {
@@ -57,6 +66,9 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         
         public void init() {
             setSize(800, 500);
+            
+            
+            
             setBackground(Color.green);
             addKeyListener(this);
             addMouseListener(this);
