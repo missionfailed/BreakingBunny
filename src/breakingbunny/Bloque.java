@@ -10,6 +10,18 @@ package breakingbunny;
  *
  * @author Tate
  */
-public class Bloque {
+public class Bloque extends Base{
+    
+    /**
+    * Metodo constructor que hereda los atributos de la clase <code>Base</code>.
+    * @param posX es la <code>posiscion en x</code> del objeto Bloque.
+    * @param posY es el <code>posiscion en y</code> del objeto Bloque.
+    * @param image es la <code>imagen</code> del objeto Bueno.
+    */
+    public Bloque (int posX, int posY) {
+        super(posX, posY);
+    }
+    
+    
     
 }

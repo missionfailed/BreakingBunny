@@ -10,6 +10,27 @@ package breakingbunny;
  *
  * @author Tate
  */
-public class Ponejtio {
+public class Ponejtio extends Base{
+    int velocidad;
     
+    public Ponejtio(int posX, int posY, int velocidad) {
+        super(posX, posY);
+        this.velocidad = velocidad;
+    }
+    
+     /**
+     * Metodo modificador usado para cambiar la velocidad del objeto 
+     * @param conteo es la <code>velocidad</code> del objeto.
+     */
+    public void setVelocidad(int velocidad) {
+            this.velocidad = velocidad;
+    }
+
+    /**
+     * Metodo de acceso que regresa la velocidad del objeto 
+     * @return conteo es la <code>velocidad</code> del objeto.
+     */
+    public int getVelocidad() {
+            return velocidad;
+    }
 }
