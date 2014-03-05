@@ -8,7 +8,7 @@ package breakingbunny;
 
 /**
  *
- * @author Tate
+ * @author Tate && Ovi
  */
 public class Ponejtio extends Base{
     int velocidad;

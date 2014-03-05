@@ -8,7 +8,7 @@ package breakingbunny;
 
 /**
  *
- * @author Tate
+ * @author Tate && Ovi
  */
 public class Bloque extends Base{
     

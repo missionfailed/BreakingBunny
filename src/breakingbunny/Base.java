@@ -8,7 +8,7 @@ package breakingbunny;
 
 /**
  *
- * @author Tate
+ * @author Tate && Ovi
  */
 import javax.swing.ImageIcon;
 import java.awt.Image;
