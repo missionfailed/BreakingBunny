@@ -66,7 +66,10 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         
         public void init() {
             setSize(800, 500);
-            
+            direccion = 0;
+            instrucciones = false;
+            pausa = false;
+            vidas = 3;
             
             
             setBackground(Color.green);
