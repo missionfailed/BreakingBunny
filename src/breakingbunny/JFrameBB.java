@@ -70,9 +70,15 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             instrucciones = false;
             pausa = false;
             vidas = 3;
+            ponejito = new Ponejtio(0, 0, 10);
+            int posX = getWidth()/2 + ponejito.getAncho()/2;
+            int posY = getHeight() - ponejito.getAlto();
+            ponejito.setPosX(posX);
+            ponejito.setPosY(posY);
             
             
-            setBackground(Color.green);
+            
+            setBackground(Color.blue);
             addKeyListener(this);
             addMouseListener(this);
         }
@@ -141,7 +147,28 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
          * Este metodo actualiza a los personajes en el applet en sus movimientos
         */
         public void actualiza() {
+            //Determina el tiempo que ha transcurrido desde que el Applet inicio su ejecución
+            long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
             
+            //Guarda el tiempo actual
+            tiempoActual += tiempoTranscurrido;
+            
+            if (!pausa && !instrucciones) {
+                //dependiendo de la tecla que se este oprimiendo es hacia donde se mueve el personaje Ponejito
+                switch (direccion) {
+                    case 1:
+                        ponejito.setPosX(ponejito.getPosX() + ponejito.getVelocidad());
+                        ponejito.actualiza(tiempoActual);
+                        break; 
+                    case 2:
+                        ponejito.setPosX(ponejito.getPosX() - ponejito.getVelocidad());
+                        ponejito.actualiza(tiempoActual);
+                        break;
+                    case 0:
+                        ponejito.setPosX(ponejito.getPosX());
+                        break;
+                }
+            }
 
         }
         
@@ -170,7 +197,13 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
 	 * @param e es el <code>evento</code> generado al presionar las teclas.
 	 */
         public void keyPressed(KeyEvent e) {
-
+            //presiono flecha izquierda
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                direccion = 2;
+            //Presiono flecha derecha
+            } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                direccion = 1;
+            }
             
             //Presiono la letra P
             if (e.getKeyCode() == KeyEvent.VK_P) {
@@ -243,7 +276,9 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         public void paint1 (Graphics g){
             //Se pinta siempre y cuando tengas vidas
             if (vidas > 0) {
-
+                if (ponejito!=null) {
+                    g.drawImage(ponejito.getImagenI(), ponejito.getPosX(), ponejito.getPosY(), this);
+                }
             } else {
                 //imprime creditos
                 g.drawImage(creditos, 0, 0, this);

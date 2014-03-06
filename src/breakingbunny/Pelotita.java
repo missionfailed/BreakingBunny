@@ -13,7 +13,8 @@ package breakingbunny;
 import java.awt.Image;
 import java.awt.Toolkit;
 public class Pelotita extends Base{
-    int velocidad;
+    int velX;
+    int velY;
     
     /**
     * Metodo constructor que hereda los atributos de la clase <code>Base</code>.
@@ -22,9 +23,11 @@ public class Pelotita extends Base{
     * @param image es la <code>imagen</code> del objeto Pelotita.
     * @param velocidad es la <code>velocidad</code> del objeto Pelotita
     */
-    public Pelotita (int posX, int posY, int velocidad) {
+    public Pelotita (int posX, int posY, int velX, int velY) {
         super(posX, posY);
-        this.velocidad = velocidad;
+        this.velX = velX;
+        this.velY = velY;        
+        
         
         Image pelota = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/fire.gif"));
         anim = new Animacion();
@@ -35,15 +38,31 @@ public class Pelotita extends Base{
      * Metodo modificador usado para cambiar la velocidad del objeto 
      * @param conteo es la <code>velocidad</code> del objeto.
      */
-    public void setVelocidad(int velocidad) {
-            this.velocidad = velocidad;
+    public void setVelX(int velX) {
+            this.velX = velX;
     }
 
     /**
      * Metodo de acceso que regresa la velocidad del objeto 
      * @return conteo es la <code>velocidad</code> del objeto.
      */
-    public int getVelocidad() {
-            return velocidad;
+    public int getVelX() {
+            return velX;
+    }
+    
+    /**
+     * Metodo modificador usado para cambiar la velocidad del objeto 
+     * @param conteo es la <code>velocidad</code> del objeto.
+     */
+    public void setVelY(int velY) {
+            this.velY = velY;
+    }
+
+    /**
+     * Metodo de acceso que regresa la velocidad del objeto 
+     * @return conteo es la <code>velocidad</code> del objeto.
+     */
+    public int getVelY() {
+            return velY;
     }
 }
