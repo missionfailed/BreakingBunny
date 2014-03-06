@@ -25,6 +25,10 @@ public class Pelotita extends Base{
     public Pelotita (int posX, int posY, int velocidad) {
         super(posX, posY);
         this.velocidad = velocidad;
+        
+        Image pelota = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/fire.gif"));
+        anim = new Animacion();
+        anim.sumaCuadro(pelota, 80);
     }
     
      /**

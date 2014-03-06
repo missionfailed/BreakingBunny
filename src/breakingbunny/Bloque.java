@@ -22,6 +22,9 @@ public class Bloque extends Base{
     */
     public Bloque (int posX, int posY) {
         super(posX, posY);
+        Image bloque = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/lakitu2.gif"));
+        anim = new Animacion();
+        anim.sumaCuadro(bloque, 100);
     }
     
     
