@@ -48,11 +48,11 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private boolean instrucciones;  // Checa si se oprimio el boton para ver las instrucciones
         private int vidas;      // Vidas del personaje
         private int direccion; // Direccion del Ponejito
-        private Bloque []bloque;    // Objeto Bloque
+        private LinkedList bloques;    // Objeto Bloque
         private Ponejtio ponejito;  // Objeto Ponejtio
         private Pelotita pelotita;  // Objeto Pelotita
         private SoundClip colPared;    //Objeto AudioClip 
-        private SoundClip destrBloque;     //Objeto AudioClip
+        private SoundClip destBloque;     //Objeto AudioClip
         private String []arr;   // Objeto de lo leeido del archivo
         //Variables control de tiempo de animacion
         private long tiempoActual;
@@ -70,13 +70,19 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             instrucciones = false;
             pausa = false;
             vidas = 3;
-            ponejito = new Ponejtio(0, 0, 10);
+            //crear al ponejito en su posicion inicial
+            ponejito = new Ponejtio(0, 0, 15);
             int posX = getWidth()/2 + ponejito.getAncho()/2;
             int posY = getHeight() - ponejito.getAlto();
             ponejito.setPosX(posX);
             ponejito.setPosY(posY);
-            
-            
+            //crear a la pelotita en la posicion inicial
+            pelotita = new Pelotita(0, 0, 0, 0);
+            posX = getWidth()/2 + pelotita.getAncho()/2;
+            posY = getHeight()/2 + pelotita.getAlto()/2;
+            pelotita.setPosX(posX);
+            pelotita.setPosY(posY);
+            pelotita.setVelY(8);
             
             setBackground(Color.blue);
             addKeyListener(this);
@@ -168,6 +174,10 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                         ponejito.setPosX(ponejito.getPosX());
                         break;
                 }
+                
+                //movimiento de la pelotita
+                pelotita.setPosX(pelotita.getPosX()+pelotita.getVelX());
+                pelotita.setPosY(pelotita.getPosY()+pelotita.getVelY());
             }
 
         }
@@ -278,6 +288,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             if (vidas > 0) {
                 if (ponejito!=null) {
                     g.drawImage(ponejito.getImagenI(), ponejito.getPosX(), ponejito.getPosY(), this);
+                    g.drawImage(pelotita.getImagenI(), pelotita.getPosX(), pelotita.getPosY(), this);
                 }
             } else {
                 //imprime creditos
