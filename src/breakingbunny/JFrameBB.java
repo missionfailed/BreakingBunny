@@ -46,6 +46,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private boolean off; // Checa si se quiere sonido o no
         private boolean pausa;  // Checa si el juego esta pausado
         private boolean instrucciones;  // Checa si se oprimio el boton para ver las instrucciones
+        private boolean first;  // Checa si es la primera vez que choca la pelota con el ponejito
         private int vidas;      // Vidas del personaje
         private int direccion; // Direccion del Ponejito
         private LinkedList bloques;    // Objeto Bloque
@@ -69,6 +70,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             direccion = 0;
             instrucciones = false;
             pausa = false;
+            first = false;
             vidas = 3;
             //crear al ponejito en su posicion inicial
             ponejito = new Ponejtio(0, 0, 15);
@@ -189,7 +191,23 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
          * la  colision del bueno con los extremos del applet
         */
         public void checaColision() {
-
+            //checa colision del ponejito con los extremos del applet
+            if (ponejito.getPosX()<0) {
+                ponejito.setPosX(0);
+            }
+            if (ponejito.getPosX()+ponejito.getAncho()>getWidth()) {
+                ponejito.setPosX(getWidth()-ponejito.getAncho());
+            }
+            
+            //checa colision de la pelota con la pelotita
+            if (ponejito.intersecta(pelotita)) {
+                if (!first) {
+                    pelotita.setVelX(pelotita.getVelX()*-1);
+                    pelotita.setVelY(pelotita.getVelY()*-1);
+                } else {
+                    pelotita.setVelX((int)Math.random());
+                }
+            }
         }
         
         /**

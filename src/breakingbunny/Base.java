@@ -107,6 +107,6 @@ public class Base {
         
         public boolean mouse_contiene(int x, int y) {
             return getPerimetro().contains(x, y);
-    }
+        }
     
 }
