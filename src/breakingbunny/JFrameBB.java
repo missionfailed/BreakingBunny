@@ -203,9 +203,16 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             checaBloque(x, y);
         }
         
+        /**
+         * Metodo <I>checaBloque</I>
+         * Este metodo checa las colisiones de la pelota con
+         * el bloque en los diferentes lados
+         * @param x es la <code>posicion en x</code> de la pelotita
+         * @param y es la <code>posicion en y</code> de la pelotita
+         */
         public void checaBloque(int x, int y) {
             if (bloque.hitBottom(x, y)) {
-                pelotita.setVelY(1);
+                pelotita.setVelY(Math.abs(pelotita.getVelY()));
                 score += 50;
             }
             if (bloque.hitLeft(x, y)) {
@@ -217,11 +224,18 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 score += 50;
             }
             if (bloque.hitTop(x, y)) {
-                pelotita.setVelY(-1);
+                pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
                 score += 50;
             }
         }
         
+        /**
+         * Metodo <I>checaApplet</I>
+         * Metodo para checar las colisiones de la pelota con
+         * el Applet
+         * @param x es la <code>posicion en x</code> de la pelotita
+         * @param y es la <code>posicion en y</code> de la pelotita
+         */
         public void checaApplet(int x, int y) {
             if (x >= getWidth() - pelotita.getAncho()) {
                 pelotita.setVelX(-1*Math.abs(pelotita.getVelX()));
@@ -230,13 +244,20 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 pelotita.setVelX(Math.abs(pelotita.getVelX()));
             }
             if (y <= 0) {
-                pelotita.setVelY(1);
+                pelotita.setVelY(Math.abs(pelotita.getVelY()));
             }
             if (y >= getHeight()) {
-                pelotita.setVelY(-1);
+                pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
             }
         }
         
+        /**
+         * Metodo <I>checaPonejito</I>
+         * Metodo para checar la colision del ponejito con
+         * la pelota y el Applet
+         * @param x es la <code>posicion en x</code> de la pelotita
+         * @param y es la <code>posicion en y</code> de la pelotita
+         */
         public void checaPonejito (int x, int y) {
             //checa colision de la pelotita con el ponejito
             if (ponejito.pegaPonejito(x, y) && pelotita.getVelX() < 0) {
