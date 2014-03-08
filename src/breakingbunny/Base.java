@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class Base {
     
-    private int posX;
-    private int posY;
+    protected int posX;
+    protected int posY;
     protected Animacion anim;
     
     public Base(int posX, int posY) {

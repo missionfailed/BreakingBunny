@@ -43,4 +43,17 @@ public class Ponejtio extends Base{
     public int getVelocidad() {
             return velocidad;
     }
+    
+    /**
+     * Metodo que checa si la pelota choco con el ponejito
+     * @param ballX la posicion en x de la pelota
+     * @param ballY la posicion en y de la pelota
+     * @return <code>booleano</code>
+     */
+    public boolean pegaPonejito(int ballX, int ballY) {
+            if ((ballX >= posX) && (ballX <= posX + getAncho()) && ((ballY >= posY) && (ballY <= posY + getAlto()))) {
+                    return true;
+            }
+            return false;
+    }
 }
