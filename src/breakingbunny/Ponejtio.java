@@ -51,9 +51,9 @@ public class Ponejtio extends Base{
      * @return <code>booleano</code>
      */
     public boolean pegaPonejito(int ballX, int ballY) {
-            if ((ballX >= posX) && (ballX <= posX + getAncho()) && ((ballY >= posY) && (ballY <= posY + getAlto()))) {
-                    return true;
-            }
-            return false;
+        if ((ballX >= posX) && (ballX <= posX + getAncho()) && ((ballY >= posY) && (ballY <= posY + getAlto()))) {
+                return true;
+        }
+        return false;
     }
 }

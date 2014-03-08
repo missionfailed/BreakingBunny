@@ -48,7 +48,9 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private boolean instrucciones;  // Checa si se oprimio el boton para ver las instrucciones
         private boolean first;  // Checa si es la primera vez que choca la pelota con el ponejito
         private int vidas;      // Vidas del personaje
+        private int score;      // Score del juego
         private int direccion; // Direccion del Ponejito
+        private Bloque bloque;
         private LinkedList bloques;    // Objeto Bloque
         private Ponejtio ponejito;  // Objeto Ponejtio
         private Pelotita pelotita;  // Objeto Pelotita
@@ -72,6 +74,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             pausa = false;
             first = false;
             vidas = 3;
+            score = 0;
             //crear al ponejito en su posicion inicial
             ponejito = new Ponejtio(0, 0, 15);
             int posX = getWidth()/2 + ponejito.getAncho()/2;
@@ -84,7 +87,9 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             posY = getHeight()/2 + pelotita.getAlto()/2;
             pelotita.setPosX(posX);
             pelotita.setPosY(posY);
+            pelotita.setVelX(8);
             pelotita.setVelY(8);
+            bloque = new Bloque(0, 0, 3);
             
             setBackground(Color.blue);
             addKeyListener(this);
@@ -191,22 +196,61 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
          * la  colision del bueno con los extremos del applet
         */
         public void checaColision() {
+            int x = pelotita.getPosX();
+            int y = pelotita.getPosY();
+            checaPonejito(x, y);
+            checaApplet(x, y);
+            checaBloque(x, y);
+        }
+        
+        public void checaBloque(int x, int y) {
+            if (bloque.hitBottom(x, y)) {
+                pelotita.setVelY(1);
+                score += 50;
+            }
+            if (bloque.hitLeft(x, y)) {
+                pelotita.setVelX(-1*pelotita.getVelX());
+                score += 50;
+            }
+            if (bloque.hitRight(x, y)) {
+                pelotita.setVelX(-1*pelotita.getVelX());
+                score += 50;
+            }
+            if (bloque.hitTop(x, y)) {
+                pelotita.setVelY(-1);
+                score += 50;
+            }
+        }
+        
+        public void checaApplet(int x, int y) {
+            if (x >= getWidth() - pelotita.getAncho()) {
+                pelotita.setVelX(-1*Math.abs(pelotita.getVelX()));
+            }
+            if (x <= 0) {
+                pelotita.setVelX(Math.abs(pelotita.getVelX()));
+            }
+            if (y <= 0) {
+                pelotita.setVelY(1);
+            }
+            if (y >= getHeight()) {
+                pelotita.setVelY(-1);
+            }
+        }
+        
+        public void checaPonejito (int x, int y) {
+            //checa colision de la pelotita con el ponejito
+            if (ponejito.pegaPonejito(x, y) && pelotita.getVelX() < 0) {
+                pelotita.setVelY(-1*pelotita.getVelY());
+            }
+            if (ponejito.pegaPonejito(x, y) && pelotita.getVelX() > 0) {
+                pelotita.setVelY(-1*pelotita.getVelY());
+            }
             //checa colision del ponejito con los extremos del applet
             if (ponejito.getPosX()<0) {
                 ponejito.setPosX(0);
             }
-            if (ponejito.getPosX()+ponejito.getAncho()>getWidth()) {
+            if (ponejito.getPosX()+ponejito.getAncho() >= getWidth()) {
                 ponejito.setPosX(getWidth()-ponejito.getAncho());
-            }
-            
-            //checa colision de la pelota con la pelotita
-            if (ponejito.intersecta(pelotita)) {
-                if (!first) {
-                    pelotita.setVelX(pelotita.getVelX()*-1);
-                    pelotita.setVelY(pelotita.getVelY()*-1);
-                } else {
-                    pelotita.setVelX((int)Math.random());
-                }
             }
         }
         
