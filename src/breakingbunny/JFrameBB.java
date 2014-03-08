@@ -76,7 +76,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             vidas = 3;
             score = 0;
             //crear al ponejito en su posicion inicial
-            ponejito = new Ponejtio(0, 0, 15);
+            ponejito = new Ponejtio(0, 0, 25);
             int posX = getWidth()/2 + ponejito.getAncho()/2;
             int posY = getHeight() - ponejito.getAlto();
             ponejito.setPosX(posX);
@@ -87,8 +87,8 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             posY = getHeight()/2 + pelotita.getAlto()/2;
             pelotita.setPosX(posX);
             pelotita.setPosY(posY);
-            pelotita.setVelX(8);
-            pelotita.setVelY(8);
+            pelotita.setVelX(15);
+            pelotita.setVelY(-15);
             bloque = new Bloque(0, 0, 3);
             
             setBackground(Color.blue);
@@ -247,7 +247,15 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 pelotita.setVelY(Math.abs(pelotita.getVelY()));
             }
             if (y >= getHeight()) {
-                pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
+                //pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
+                vidas--;
+                score -= 100;
+                int posX = getWidth()/2 + pelotita.getAncho()/2;
+                int posY = getHeight()/2 + pelotita.getAlto()/2;
+                pelotita.setPosX(posX);
+                pelotita.setPosY(posY);
+                pelotita.setVelX(15);
+                pelotita.setVelY(-15);
             }
         }
         
