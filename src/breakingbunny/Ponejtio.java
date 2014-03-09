@@ -19,7 +19,7 @@ public class Ponejtio extends Base{
         super(posX, posY);
         this.velocidad = velocidad;
         
-        Image conejito1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Bunny1.gif"));
+        Image conejito1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/LadoIzq1.gif"));
         
         anim = new Animacion();
         anim.sumaCuadro(conejito1, 80);

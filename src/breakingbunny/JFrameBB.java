@@ -83,12 +83,14 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             vidas = 3;
             score = 0;
             menu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_TitleScreen.png"));
+            ins = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_Instructions.png"));
             high = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_HighScores.png"));
             fondo = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_Main.png"));
+            creditos=Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_GameOver.png"));
             //crear al ponejito en su posicion inicial
             ponejito = new Ponejtio(0, 0, 25);
             int posX = getWidth()/2 + ponejito.getAncho()/2;
-            int posY = getHeight() - ponejito.getAlto();
+            int posY = getHeight() - ponejito.getAlto()-8;
             ponejito.setPosX(posX);
             ponejito.setPosY(posY);
             //crear a la pelotita en la posicion inicial
@@ -104,7 +106,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             for(int i = 0; i < 13; i++) {
                 for(int j = 0; j < 3; j++) {
                     int numLives = 3;
-                    bloques[i][j] = new Bloque((i * bloque.getAncho()), ((j * bloque.getAlto()) + (bloque.getAlto() / 2)), numLives);
+                    bloques[i][j] = new Bloque((i * bloque.getAncho())+20, ((j * bloque.getAlto()) + (bloque.getAlto() / 2)), numLives);
                 }
             }
             
