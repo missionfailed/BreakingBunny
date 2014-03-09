@@ -448,7 +448,12 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 }
             } else {
                 //imprime creditos
+                start = true;
                 g.drawImage(creditos, 0, 0, this);
+                if (!start) {
+                    init();
+                }
+                
             }
 	}
 
