@@ -51,7 +51,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private int score;      // Score del juego
         private int direccion; // Direccion del Ponejito
         private Bloque bloque;
-        private LinkedList bloques;    // Objeto Bloque
+        private Bloque[][] bloques;    // Objeto Bloque
         private Ponejtio ponejito;  // Objeto Ponejtio
         private Pelotita pelotita;  // Objeto Pelotita
         private SoundClip colPared;    //Objeto AudioClip 
@@ -90,6 +90,13 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             pelotita.setVelX(15);
             pelotita.setVelY(-15);
             bloque = new Bloque(0, 0, 3);
+            bloques = new Bloque [10][5];
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 5; j++) {
+                    int numLives = 3;
+                    bloques[i][j] = new Bloque((i * bloque.getAncho()), ((j * bloque.getAlto()) + (bloque.getAlto() / 2)), numLives);
+                }
+            }
             
             setBackground(Color.blue);
             addKeyListener(this);
@@ -211,21 +218,25 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
          * @param y es la <code>posicion en y</code> de la pelotita
          */
         public void checaBloque(int x, int y) {
-            if (bloque.hitBottom(x, y)) {
-                pelotita.setVelY(Math.abs(pelotita.getVelY()));
-                score += 50;
-            }
-            if (bloque.hitLeft(x, y)) {
-                pelotita.setVelX(-1*pelotita.getVelX());
-                score += 50;
-            }
-            if (bloque.hitRight(x, y)) {
-                pelotita.setVelX(-1*pelotita.getVelX());
-                score += 50;
-            }
-            if (bloque.hitTop(x, y)) {
-                pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
-                score += 50;
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 5; j++) {
+                    if (bloques[i][j].hitBottom(x, y)) {
+                        pelotita.setVelY(Math.abs(pelotita.getVelY()));
+                        score += 50;
+                    }
+                    if (bloques[i][j].hitLeft(x, y)) {
+                        pelotita.setVelX(-1*pelotita.getVelX());
+                        score += 50;
+                    }
+                    if (bloques[i][j].hitRight(x, y)) {
+                        pelotita.setVelX(-1*pelotita.getVelX());
+                        score += 50;
+                    }
+                    if (bloques[i][j].hitTop(x, y)) {
+                        pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
+                        score += 50;
+                    }
+                }
             }
         }
         
@@ -377,9 +388,16 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         public void paint1 (Graphics g){
             //Se pinta siempre y cuando tengas vidas
             if (vidas > 0) {
-                if (ponejito!=null) {
+                if (ponejito!=null && pelotita!=null) {
                     g.drawImage(ponejito.getImagenI(), ponejito.getPosX(), ponejito.getPosY(), this);
                     g.drawImage(pelotita.getImagenI(), pelotita.getPosX(), pelotita.getPosY(), this);
+                    for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 5; j++) {
+                            if (bloques[i][j].getHits() > 0) {
+                                g.drawImage(bloques[i][j].getImagenI(), bloques[i][j].getPosX(), bloques[i][j].getPosY(), this);
+                            }
+                        }
+                    }
                 }
             } else {
                 //imprime creditos
