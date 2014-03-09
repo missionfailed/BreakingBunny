@@ -55,6 +55,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private int vidas;      // Vidas del personaje
         private int score;      // Score del juego
         private int direccion; // Direccion del Ponejito
+        private int direccion_ant; //Direccion Anterior
         private Bloque bloque;
         private Bloque[][] bloques;    // Objeto Bloque
         private Ponejtio ponejito;  // Objeto Ponejtio
@@ -194,10 +195,12 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 switch (direccion) {
                     case 1:
                         ponejito.setPosX(ponejito.getPosX() + ponejito.getVelocidad()+5);
+                        if (direccion_ant != direccion)
                         ponejito.actualiza(tiempoActual);
                         break; 
                     case 2:
                         ponejito.setPosX(ponejito.getPosX() - ponejito.getVelocidad()+5);
+                        if (direccion_ant != direccion)
                         ponejito.actualiza(tiempoActual);
                         break;
                     case 0:
@@ -335,9 +338,11 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         public void keyPressed(KeyEvent e) {
             //presiono flecha izquierda
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                direccion_ant = direccion;
                 direccion = 2;
             //Presiono flecha derecha
             } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                direccion_ant = direccion;
                 direccion = 1;
             }
             
