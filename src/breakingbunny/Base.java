@@ -101,12 +101,12 @@ public class Base {
 		return getPerimetro().intersects(obj.getPerimetro());
 	}
         
+         /**
+          * Metodo que actualiza la animacion del conejito
+          * @param tiempo 
+          */
         public void actualiza(long tiempo) {
             anim.actualiza(tiempo);
-        }
-        
-        public boolean mouse_contiene(int x, int y) {
-            return getPerimetro().contains(x, y);
         }
     
 }
