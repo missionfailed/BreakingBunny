@@ -185,7 +185,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             //Guarda el tiempo actual
             tiempoActual += tiempoTranscurrido;
             
-            if (!pausa && !instrucciones) {
+            if (!pausa && !start) {
                 //dependiendo de la tecla que se este oprimiendo es hacia donde se mueve el personaje Ponejito
                 switch (direccion) {
                     case 1:

@@ -43,7 +43,7 @@ public class Bloque extends Base{
     }
     
     public boolean destruido() {
-        return hits == 0;
+        return hits <= 0;
     }
     
     //Detect if the brick has been hit on its bottom, top, left, or right sides
