@@ -59,7 +59,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private Bloque[][] bloques;    // Objeto Bloque
         private Ponejtio ponejito;  // Objeto Ponejtio
         private Pelotita pelotita;  // Objeto Pelotita
-        private SoundClip colPared;    //Objeto AudioClip 
+        private SoundClip col;    //Objeto AudioClip 
         private SoundClip destBloque;     //Objeto AudioClip
         private SoundClip musica;        //Objeto SoundClip
         private String []arr;   // Objeto de lo leeido del archivo
@@ -87,6 +87,10 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             high = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_HighScores.png"));
             fondo = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_Main.png"));
             creditos=Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_GameOver.png"));
+            col = new SoundClip ("/sounds/bounce.wav");
+            musica = new SoundClip ("/sounds/8-bit Internets Levels.wav");
+            musica.setLooping(true);
+            musica.play();
             //crear al ponejito en su posicion inicial
             ponejito = new Ponejtio(0, 0, 25);
             int posX = getWidth()/2 + ponejito.getAncho()/2;
@@ -238,18 +242,22 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                             pelotita.setVelY(Math.abs(pelotita.getVelY()));
                             System.out.println("PEGA ABAJO");
                             score += 50;
+                            col.play();
                         }
                         if (bloques[i][j].hitLeft(x+pelotita.getAncho(), y)) {
                             pelotita.setVelX(-1*pelotita.getVelX());
                             score += 50;
+                            col.play();
                         }
                         if (bloques[i][j].hitRight(x, y)) {
                             pelotita.setVelX(-1*pelotita.getVelX());
                             score += 50;
+                            col.play();
                         }
                         if (bloques[i][j].hitTop(x, y+pelotita.getAlto())) {
                             pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
                             score += 50;
+                            col.play();
                         }
                     }
                 }
