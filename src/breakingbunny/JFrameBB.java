@@ -42,10 +42,15 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private Image dbImage;	// Imagen a proyectar
         private Image ins;      // Imagen de instrucciones
         private Image creditos; // Imagen de creditos
+        private Image high;     // Imagen de highscores
+        private Image menu;    // Imagen del menu
+        private Image fondo;     // Imagen de fondo
         private Graphics dbg;	// Objeto grafico
         private boolean off; // Checa si se quiere sonido o no
+        private boolean start; // Checa si empezo el juego
         private boolean pausa;  // Checa si el juego esta pausado
         private boolean instrucciones;  // Checa si se oprimio el boton para ver las instrucciones
+        private boolean highscores;     // Checa si se oprimio el boton de highscores
         private boolean first;  // Checa si es la primera vez que choca la pelota con el ponejito
         private int vidas;      // Vidas del personaje
         private int score;      // Score del juego
@@ -56,7 +61,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private Pelotita pelotita;  // Objeto Pelotita
         private SoundClip colPared;    //Objeto AudioClip 
         private SoundClip destBloque;     //Objeto AudioClip
-        private SoundClip fondo;        //Objeto SoundClip
+        private SoundClip musica;        //Objeto SoundClip
         private String []arr;   // Objeto de lo leeido del archivo
         //Variables control de tiempo de animacion
         private long tiempoActual;
@@ -74,8 +79,12 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             instrucciones = false;
             pausa = false;
             first = false;
+            start = true;
             vidas = 3;
             score = 0;
+            menu = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_TitleScreen.png"));
+            high = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_HighScores.png"));
+            fondo = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/BreakingBunny_Main.png"));
             //crear al ponejito en su posicion inicial
             ponejito = new Ponejtio(0, 0, 25);
             int posX = getWidth()/2 + ponejito.getAncho()/2;
@@ -91,9 +100,9 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             pelotita.setVelX(15);
             pelotita.setVelY(-15);
             bloque = new Bloque(0, 0, 3);
-            bloques = new Bloque [10][5];
-            for(int i = 0; i < 10; i++) {
-                for(int j = 0; j < 5; j++) {
+            bloques = new Bloque [13][3];
+            for(int i = 0; i < 13; i++) {
+                for(int j = 0; j < 3; j++) {
                     int numLives = 3;
                     bloques[i][j] = new Bloque((i * bloque.getAncho()), ((j * bloque.getAlto()) + (bloque.getAlto() / 2)), numLives);
                 }
@@ -219,8 +228,8 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
          * @param y es la <code>posicion en y</code> de la pelotita
          */
         public void checaBloque(int x, int y) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < 13; i++) {
+                for (int j = 0; j < 3; j++) {
                     if (!bloques[i][j].destruido()) {
                         if (bloques[i][j].hitBottom(x, y)) {
                             pelotita.setVelY(Math.abs(pelotita.getVelY()));
@@ -320,6 +329,11 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 direccion = 1;
             }
             
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                if (start) {
+                    start = false;
+                }
+            }
             //Presiono la letra P
             if (e.getKeyCode() == KeyEvent.VK_P) {
                 pausa = !pausa;
@@ -344,11 +358,15 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             }
             //Presiono la letra I
             if (e.getKeyCode() == KeyEvent.VK_I) {
-                instrucciones = !instrucciones;
+                if (start && !highscores) {
+                    instrucciones = !instrucciones;
+                }
             }
-            //Presiono la letra S
-            if (e.getKeyCode() == KeyEvent.VK_S) {
-                off = !off;
+            //Presiono la letra H
+            if (e.getKeyCode() == KeyEvent.VK_H) {
+                if (start && !instrucciones) {
+                    highscores = !highscores;
+                }
             }
         }
         
@@ -391,11 +409,20 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         public void paint1 (Graphics g){
             //Se pinta siempre y cuando tengas vidas
             if (vidas > 0) {
-                if (ponejito!=null && pelotita!=null) {
+                if (start) {
+                    g.drawImage(menu, 0, 0, this);
+                    if (instrucciones) {
+                        g.drawImage(ins, 0, 0, this);
+                    }
+                    if (highscores) {
+                        g.drawImage(high, 0, 0, this);
+                    }
+                } else if (ponejito!=null && pelotita!=null) {
+                    g.drawImage(fondo, 0, 0, this);
                     g.drawImage(ponejito.getImagenI(), ponejito.getPosX(), ponejito.getPosY(), this);
                     g.drawImage(pelotita.getImagenI(), pelotita.getPosX(), pelotita.getPosY(), this);
-                    for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 5; j++) {
+                    for (int i = 0; i < 13; i++) {
+			for (int j = 0; j < 3; j++) {
                             if (!bloques[i][j].destruido()) {
                                 g.drawImage(bloques[i][j].getImagenI(), bloques[i][j].getPosX(), bloques[i][j].getPosY(), this);
                             }
