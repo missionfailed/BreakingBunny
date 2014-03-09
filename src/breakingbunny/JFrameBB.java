@@ -221,21 +221,23 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         public void checaBloque(int x, int y) {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 5; j++) {
-                    if (bloques[i][j].hitBottom(x, y)) {
-                        pelotita.setVelY(Math.abs(pelotita.getVelY()));
-                        score += 50;
-                    }
-                    if (bloques[i][j].hitLeft(x, y)) {
-                        pelotita.setVelX(-1*pelotita.getVelX());
-                        score += 50;
-                    }
-                    if (bloques[i][j].hitRight(x, y)) {
-                        pelotita.setVelX(-1*pelotita.getVelX());
-                        score += 50;
-                    }
-                    if (bloques[i][j].hitTop(x, y)) {
-                        pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
-                        score += 50;
+                    if (!bloques[i][j].destruido()) {
+                        if (bloques[i][j].hitBottom(x, y)) {
+                            pelotita.setVelY(Math.abs(pelotita.getVelY()));
+                            score += 50;
+                        }
+                        if (bloques[i][j].hitLeft(x, y)) {
+                            pelotita.setVelX(-1*pelotita.getVelX());
+                            score += 50;
+                        }
+                        if (bloques[i][j].hitRight(x, y)) {
+                            pelotita.setVelX(-1*pelotita.getVelX());
+                            score += 50;
+                        }
+                        if (bloques[i][j].hitTop(x, y)) {
+                            pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
+                            score += 50;
+                        }
                     }
                 }
             }
