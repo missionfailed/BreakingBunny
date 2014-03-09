@@ -235,7 +235,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                             pelotita.setVelY(Math.abs(pelotita.getVelY()));
                             score += 50;
                         }
-                        if (bloques[i][j].hitLeft(x, y)) {
+                        if (bloques[i][j].hitLeft(x+pelotita.getAncho(), y)) {
                             pelotita.setVelX(-1*pelotita.getVelX());
                             score += 50;
                         }
@@ -243,7 +243,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                             pelotita.setVelX(-1*pelotita.getVelX());
                             score += 50;
                         }
-                        if (bloques[i][j].hitTop(x, y)) {
+                        if (bloques[i][j].hitTop(x, y+pelotita.getAlto())) {
                             pelotita.setVelY(-1*Math.abs(pelotita.getVelY()));
                             score += 50;
                         }
