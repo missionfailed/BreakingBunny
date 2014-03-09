@@ -48,7 +48,7 @@ public class Bloque extends Base{
     
     //Detect if the brick has been hit on its bottom, top, left, or right sides
     public boolean hitBottom(int ballX, int ballY) {
-        if ((ballX >= posX) && (ballX <= posX + getAncho()) && (ballY == posY + getAlto())) {
+        if ((ballX >= posX) && (ballX <= posX + getAncho()) && (ballY <= posY + getAlto())) {
                 menosHits();
                 return true;
         }
