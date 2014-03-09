@@ -189,11 +189,11 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                 //dependiendo de la tecla que se este oprimiendo es hacia donde se mueve el personaje Ponejito
                 switch (direccion) {
                     case 1:
-                        ponejito.setPosX(ponejito.getPosX() + ponejito.getVelocidad());
+                        ponejito.setPosX(ponejito.getPosX() + ponejito.getVelocidad()+5);
                         ponejito.actualiza(tiempoActual);
                         break; 
                     case 2:
-                        ponejito.setPosX(ponejito.getPosX() - ponejito.getVelocidad());
+                        ponejito.setPosX(ponejito.getPosX() - ponejito.getVelocidad()+5);
                         ponejito.actualiza(tiempoActual);
                         break;
                     case 0:
@@ -233,8 +233,10 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
             for (int i = 0; i < 13; i++) {
                 for (int j = 0; j < 3; j++) {
                     if (!bloques[i][j].destruido()) {
+                        //System.out.println("Se supone que pega algo");
                         if (bloques[i][j].hitBottom(x, y)) {
                             pelotita.setVelY(Math.abs(pelotita.getVelY()));
+                            System.out.println("PEGA ABAJO");
                             score += 50;
                         }
                         if (bloques[i][j].hitLeft(x+pelotita.getAncho(), y)) {
