@@ -29,7 +29,7 @@ public class Pelotita extends Base{
         this.velY = velY;        
         
         
-        Image pelota = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/fire.gif"));
+        Image pelota = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Meth1.gif"));
         anim = new Animacion();
         anim.sumaCuadro(pelota, 80);
     }

@@ -25,7 +25,7 @@ public class Bloque extends Base{
     public Bloque (int posX, int posY, int hits) {
         super(posX, posY);
         this.hits = hits;
-        Image bloque = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/lakitu2.gif"));
+        Image bloque = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/Carrot1.gif"));
         anim = new Animacion();
         anim.sumaCuadro(bloque, 100);
     }
@@ -48,7 +48,7 @@ public class Bloque extends Base{
     
     //Detect if the brick has been hit on its bottom, top, left, or right sides
     public boolean hitBottom(int ballX, int ballY) {
-        if ((ballX >= posX) && (ballX <= posX + getAncho() + 1) && (ballY == posY + getAlto())) {
+        if ((ballX >= posX) && (ballX <= posX + getAncho()) && (ballY == posY + getAlto())) {
                 menosHits();
                 return true;
         }
@@ -56,7 +56,7 @@ public class Bloque extends Base{
     }
 
     public boolean hitTop(int ballX, int ballY) {
-        if ((ballX >= posX) && (ballX <= posX + getAncho() + 1) && (ballY == posY)) {
+        if ((ballX >= posX) && (ballX <= posX + getAncho()) && (ballY == posY)) {
                 menosHits();
                 return true;
         }

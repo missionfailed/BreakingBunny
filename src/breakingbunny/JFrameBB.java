@@ -56,6 +56,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         private Pelotita pelotita;  // Objeto Pelotita
         private SoundClip colPared;    //Objeto AudioClip 
         private SoundClip destBloque;     //Objeto AudioClip
+        private SoundClip fondo;        //Objeto SoundClip
         private String []arr;   // Objeto de lo leeido del archivo
         //Variables control de tiempo de animacion
         private long tiempoActual;
@@ -68,7 +69,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
         }
         
         public void init() {
-            setSize(800, 500);
+            setSize(1000, 800);
             direccion = 0;
             instrucciones = false;
             pausa = false;
@@ -393,7 +394,7 @@ public class JFrameBB extends JFrame implements Runnable, KeyListener, MouseList
                     g.drawImage(pelotita.getImagenI(), pelotita.getPosX(), pelotita.getPosY(), this);
                     for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 5; j++) {
-                            if (bloques[i][j].getHits() > 0) {
+                            if (!bloques[i][j].destruido()) {
                                 g.drawImage(bloques[i][j].getImagenI(), bloques[i][j].getPosX(), bloques[i][j].getPosY(), this);
                             }
                         }
